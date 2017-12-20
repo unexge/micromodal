@@ -189,7 +189,7 @@ var MicroModal = function () {
     }, {
       key: 'onClick',
       value: function onClick(event) {
-        if (event.target.hasAttribute('data-close') || event.target.hasAttribute('data-micromodal-close')) {
+        if (event.target.hasAttribute('data-micromodal-close')) {
           this.closeModal();
           event.preventDefault();
         }
@@ -234,11 +234,11 @@ var MicroModal = function () {
     return Modal;
   }();
 
-  var generateTriggerMap = function generateTriggerMap(triggers, triggerAttr) {
+  var generateTriggerMap = function generateTriggerMap(triggers) {
     var triggerMap = [];
 
     triggers.forEach(function (trigger) {
-      var targetModal = triggerAttr && trigger.attributes[triggerAttr].value || trigger.dataset.micromodalTrigger;
+      var targetModal = trigger.dataset.micromodalTrigger;
       if (triggerMap[targetModal] === undefined) triggerMap[targetModal] = [];
       triggerMap[targetModal].push(trigger);
     });
@@ -272,8 +272,9 @@ var MicroModal = function () {
 
   var init = function init(config) {
     var options = config || {};
-    var triggers = [].concat(toConsumableArray(document.querySelectorAll((options.openTrigger ? '[' + options.openTrigger + ']' : false) || '[data-micromodal-trigger]')));
-    var triggerMap = generateTriggerMap(triggers, options.openTrigger);
+
+    var triggers = [].concat(toConsumableArray(document.querySelectorAll('[data-micromodal-trigger]')));
+    var triggerMap = generateTriggerMap(triggers);
 
     if (options.debugMode === true && validateArgs(triggers, triggerMap) === false) return;
 
