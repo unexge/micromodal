@@ -3,7 +3,6 @@
   "version": "0.3.0",
   "description": "Tiny javascript library for creating accessible modal dialogs",
   "main": "dist/micromodal.js",
-  "module": "dist/micromodal.es.js",
   "jsdelivr": "dist/micromodal.min.js",
   "scripts": {
     "test": "cypress run",
